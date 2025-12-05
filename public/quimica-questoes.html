@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudai - Questões de Língua Portuguesa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen">
+<!-- Navbar -->
+<nav class="bg-white shadow-md fixed top-0 left-0 w-full z-40 flex items-center justify-between px-4 py-2">
+    <!-- Menu button and Logo -->
+    <div class="flex items-center space-x-4">
+        <button id="menuBtn" class="bg-indigo-600 text-white p-3 rounded-full shadow-lg toggle-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <a href="index.html" class="text-indigo-600 text-lg font-bold">Estudai</a>
+    </div>
+
+    <!-- Botões de Navegação na Navbar -->
+    <div class="flex items-center space-x-4 ml-auto mr-4">
+    <a href="index.html#services" data-tab="activities" class="text-gray-700 hover:text-indigo-600 transition flex items-center text-sm font-medium" onclick="activateTab('activities')">
+        <i class="fas fa-running mr-2"></i> Atividades
+    </a>
+    <a href="index.html#services" data-tab="materials" class="text-gray-700 hover:text-indigo-600 transition flex items-center text-sm font-medium" onclick="activateTab('materials')">
+        <i class="fas fa-book mr-2"></i> Materiais
+    </a>
+</div>
+    
+    <!-- Profile dropdown -->
+    <div class="relative">
+        <button id="profileBtn" class="flex items-center space-x-2 text-gray-700 hover:text-indigo-600 focus:outline-none">
+            <i class="fas fa-user-circle text-2xl"></i>
+            <span class="hidden sm:inline">Perfil</span>
+            <i class="fas fa-chevron-down text-xs"></i>
+        </button>
+        <div id="profileDropdown" class="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg hidden">
+            <a href="perfil.html" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
+            <a href="seguranca.html" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Segurança</a>
+        </div>
+    </div>
+</nav>
+<div class="pt-16"></div> <!-- Spacer for fixed navbar -->
+
+    <!-- Menu lateral -->
+    <div class="sidebar" id="sidebar">
+        <div class="p-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-xl font-bold text-indigo-600">Estudai</h2>
+                <button id="closeBtn" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-2">
+                <a href="index.html#home" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-home mr-3"></i> Início
+                </a>
+                <a href="index.html#about" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-info-circle mr-3"></i> Sobre
+                </a>
+                <a href="apostila.html" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-file-alt mr-3"></i> Apostilas
+                </a>
+                <a href="videoaulas.html" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-video mr-3"></i> Videoaulas
+                </a>
+                <a href="banco-questoes.html" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-question-circle mr-3"></i> Banco de Questões
+                </a>
+                <a href="index.html#contact" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-envelope mr-3"></i> Contato
+                </a>
+            </div>
+            
+            <div class="mt-8 pt-4 border-t border-gray-200">
+                <p class="text-xs text-gray-500 text-center">© 2023 Estudai. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão de Voltar -->
+    <div class="fixed top-20 left-4 z-30">
+        <button onclick="window.history.back()" class="bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition focus:outline-none focus:ring-2 focus:ring-indigo-500" title="Voltar à página anterior">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <main class="container mx-auto px-4 py-16">
+        <h1 class="text-4xl font-bold text-center text-slate-800 mb-8">Questões de Química - 1º Ano do Ensino Médio</h1>
+        <p class="text-center text-slate-600 mb-12">Pratique com questões de múltipla escolha sobre conceitos fundamentais de Química. Selecione uma alternativa e clique em "Ver Resposta" para ver o resultado.</p>
+
+        <div class="space-y-8">
+            <!-- Química -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-2xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-flask text-indigo-600 mr-3"></i> Química
+                </h2>
+                <div class="space-y-6">
+                    <!-- Questão 1 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">1. Química é a ciência que estuda:</p>
+                        <form class="question-form" data-correct="B">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem1" value="A" class="mr-2"> A) A vida dos seres vivos
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem1" value="B" class="mr-2"> B) A composição, estrutura e transformações da matéria
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem1" value="C" class="mr-2"> C) Apenas reações em laboratório
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem1" value="D" class="mr-2"> D) Apenas fenômenos físicos
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 2 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">2. Massa, volume e impenetrabilidade são exemplos de:</p>
+                        <form class="question-form" data-correct="B">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem2" value="A" class="mr-2"> A) Propriedades funcionais
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem2" value="B" class="mr-2"> B) Propriedades gerais da matéria
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem2" value="C" class="mr-2"> C) Misturas homogêneas
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem2" value="D" class="mr-2"> D) Estados físicos
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 3 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">3. A passagem do estado sólido diretamente para o gasoso chama-se:</p>
+                        <form class="question-form" data-correct="B">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem3" value="A" class="mr-2"> A) Condensação
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem3" value="B" class="mr-2"> B) Sublimação
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem3" value="C" class="mr-2"> C) Vaporização
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem3" value="D" class="mr-2"> D) Fusão
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 4 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">4. Um sistema homogêneo possui:</p>
+                        <form class="question-form" data-correct="C">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem4" value="A" class="mr-2"> A) Duas fases visíveis
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem4" value="B" class="mr-2"> B) Muitas fases
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem4" value="C" class="mr-2"> C) Uma única fase
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem4" value="D" class="mr-2"> D) Apenas sólidos
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 5 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">5. Para Dalton, o átomo era:</p>
+                        <form class="question-form" data-correct="B">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem5" value="A" class="mr-2"> A) Divisível
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem5" value="B" class="mr-2"> B) Maciço e indivisível
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem5" value="C" class="mr-2"> C) Com prótons e nêutrons
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem5" value="D" class="mr-2"> D) Um núcleo denso e elétrons ao redor
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 6 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">6. O modelo de Thomson ficou conhecido como:</p>
+                        <form class="question-form" data-correct="A">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem6" value="A" class="mr-2"> A) Pudim de passas
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem6" value="B" class="mr-2"> B) Sistema solar
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem6" value="C" class="mr-2"> C) Planetário
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem6" value="D" class="mr-2"> D) Bola de bilhar
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 7 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">7. Número atômico representa:</p>
+                        <form class="question-form" data-correct="B">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem7" value="A" class="mr-2"> A) Número de elétrons na camada de valência
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem7" value="B" class="mr-2"> B) Número de prótons
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem7" value="C" class="mr-2"> C) Soma de prótons e nêutrons
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem7" value="D" class="mr-2"> D) Número de nêutrons
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 8 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">8. Um cátion é formado quando o átomo:</p>
+                        <form class="question-form" data-correct="B">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem8" value="A" class="mr-2"> A) Ganha elétrons
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem8" value="B" class="mr-2"> B) Perde elétrons
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem8" value="C" class="mr-2"> C) Perde prótons
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem8" value="D" class="mr-2"> D) Ganha nêutrons
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 9 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">9. Elementos isótopos possuem:</p>
+                        <form class="question-form" data-correct="B">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem9" value="A" class="mr-2"> A) Mesmo número de massa
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem9" value="B" class="mr-2"> B) Mesmo número atômico
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem9" value="C" class="mr-2"> C) Mesmo número de nêutrons
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem9" value="D" class="mr-2"> D) Mesma massa molar
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 10 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">10. Na Tabela Periódica, os elementos estão organizados em:</p>
+                        <form class="question-form" data-correct="C">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem10" value="A" class="mr-2"> A) Famílias e massas
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem10" value="B" class="mr-2"> B) Períodos e nêutrons
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem10" value="C" class="mr-2"> C) Famílias e períodos
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem10" value="D" class="mr-2"> D) Linhas e elétrons
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 11 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">11. Os gases nobres possuem como característica principal:</p>
+                        <form class="question-form" data-correct="C">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem11" value="A" class="mr-2"> A) Alta reatividade
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem11" value="B" class="mr-2"> B) Baixa eletronegatividade
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem11" value="C" class="mr-2"> C) Estabilidade química
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem11" value="D" class="mr-2"> D) Fazer ligações iônicas
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 12 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">12. A ligação entre metal e ametal é:</p>
+                        <form class="question-form" data-correct="B">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem12" value="A" class="mr-2"> A) Covalente
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem12" value="B" class="mr-2"> B) Iônica
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem12" value="C" class="mr-2"> C) Metálica
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem12" value="D" class="mr-2"> D) Dipolo-dipolo
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 13 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">13. Uma ligação covalente dupla envolve o compartilhamento de:</p>
+                        <form class="question-form" data-correct="B">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem13" value="A" class="mr-2"> A) 1 par de elétrons
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem13" value="B" class="mr-2"> B) 2 pares de elétrons
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem13" value="C" class="mr-2"> C) 3 pares
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem13" value="D" class="mr-2"> D) Apenas 1 elétron
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 14 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">14. Ligações de hidrogênio ocorrem entre H e:</p>
+                        <form class="question-form" data-correct="A">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem14" value="A" class="mr-2"> A) F, O ou N
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem14" value="B" class="mr-2"> B) Cl e Br
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem14" value="C" class="mr-2"> C) Metais alcalinos
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem14" value="D" class="mr-2"> D) Metais de transição
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 15 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">15. Ácidos liberam, em solução aquosa:</p>
+                        <form class="question-form" data-correct="B">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem15" value="A" class="mr-2"> A) OH–
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem15" value="B" class="mr-2"> B) H+
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem15" value="C" class="mr-2"> C) Na+
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem15" value="D" class="mr-2"> D) O2–
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 16 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">16. Uma base de Arrhenius libera:</p>
+                        <form class="question-form" data-correct="B">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem16" value="A" class="mr-2"> A) H+
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem16" value="B" class="mr-2"> B) OH–
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem16" value="C" class="mr-2"> C) Na+
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem16" value="D" class="mr-2"> D) Cl–
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 17 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">17. O sal é formado pela reação entre:</p>
+                        <form class="question-form" data-correct="C">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem17" value="A" class="mr-2"> A) Ácido + ácido
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem17" value="B" class="mr-2"> B) Base + base
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem17" value="C" class="mr-2"> C) Ácido + base
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem17" value="D" class="mr-2"> D) Óxido + gás
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 18 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">18. Óxidos que reagem com ácidos e bases são chamados:</p>
+                        <form class="question-form" data-correct="C">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem18" value="A" class="mr-2"> A) Ácidos
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem18" value="B" class="mr-2"> B) Básicos
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem18" value="C" class="mr-2"> C) Anfóteros
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem18" value="D" class="mr-2"> D) Neutros
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 19 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">19. Um sistema heterogêneo apresenta:</p>
+                        <form class="question-form" data-correct="B">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem19" value="A" class="mr-2"> A) Somente 1 fase
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem19" value="B" class="mr-2"> B) Duas ou mais fases
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem19" value="C" class="mr-2"> C) Apenas líquidos
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem19" value="D" class="mr-2"> D) Apenas sólidos
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                    <!-- Questão 20 -->
+                    <div class="border-b pb-4">
+                        <p class="font-medium mb-2">20. O raio atômico aumenta:</p>
+                        <form class="question-form" data-correct="B">
+                            <div class="space-y-2">
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem20" value="A" class="mr-2"> A) Da esquerda para direita
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem20" value="B" class="mr-2"> B) De cima para baixo e da direita para a esquerda
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem20" value="C" class="mr-2"> C) Sempre diminui
+                                </label>
+                                <label class="flex items-center option-label">
+                                    <input type="radio" name="chem20" value="D" class="mr-2"> D) É constante
+                                </label>
+                            </div>
+                            <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                            <div class="feedback mt-2 text-sm"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

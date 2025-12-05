@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudai - Seu Portal de Estudos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos para as abas - Adicione isso ao seu style.css ou mantenha aqui */
+        .services-tab {
+            display: none;
+        }
+        .services-tab.active {
+            display: block;
+        }
+        .tab-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background-color: #e0e7ff; /* indigo-100 */
+            color: #4f46e5; /* indigo-600 */
+            font-weight: 500;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .tab-btn.active {
+            background-color: #4f46e5; /* indigo-600 */
+            color: #ffffff; /* white */
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+<!-- Navbar -->
+<nav class="bg-white shadow-md fixed top-0 left-0 w-full z-40 flex items-center justify-between px-4 py-2">
+    <!-- Menu button and Logo -->
+    <div class="flex items-center space-x-4">
+        <button id="menuBtn" class="bg-indigo-600 text-white p-3 rounded-full shadow-lg toggle-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <a href="index.html" class="text-indigo-600 text-lg font-bold">Estudai</a>
+    </div>
+
+    <!-- Botões de Navegação na Navbar -->
+    <div class="flex items-center space-x-4 ml-auto mr-4">
+    <a href="index.html#services" data-tab="activities" class="text-gray-700 hover:text-indigo-600 transition flex items-center text-sm font-medium" onclick="activateTab('activities')">
+        <i class="fas fa-running mr-2"></i> Atividades
+    </a>
+    <a href="index.html#services" data-tab="materials" class="text-gray-700 hover:text-indigo-600 transition flex items-center text-sm font-medium" onclick="activateTab('materials')">
+        <i class="fas fa-book mr-2"></i> Materiais
+    </a>
+</div>
+    
+    <!-- Profile dropdown -->
+    <div class="relative">
+        <button id="profileBtn" class="flex items-center space-x-2 text-gray-700 hover:text-indigo-600 focus:outline-none">
+            <i class="fas fa-user-circle text-2xl"></i>
+            <span class="hidden sm:inline">Perfil</span>
+            <i class="fas fa-chevron-down text-xs"></i>
+        </button>
+        <div id="profileDropdown" class="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg hidden">
+            <a href="perfil.html" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
+            <a href="seguranca.html" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Segurança</a>
+        </div>
+    </div>
+</nav>
+<div class="pt-16"></div> <!-- Spacer for fixed navbar -->
+
+    <!-- Menu lateral -->
+    <div class="sidebar" id="sidebar">
+        <div class="p-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-xl font-bold text-indigo-600">Estudai</h2>
+                <button id="closeBtn" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-2">
+                <a href="index.html#home" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-home mr-3"></i> Início
+                </a>
+                <a href="index.html#about" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-info-circle mr-3"></i> Sobre
+                </a>
+                <a href="apostila.html" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-file-alt mr-3"></i> Apostilas
+                </a>
+                <a href="videoaulas.html" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-video mr-3"></i> Videoaulas
+                </a>
+                <a href="banco-questoes.html" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-question-circle mr-3"></i> Banco de Questões
+                </a>
+                <a href="index.html#contact" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-envelope mr-3"></i> Contato
+                </a>
+            </div>
+            
+            <div class="mt-8 pt-4 border-t border-gray-200">
+                <p class="text-xs text-gray-500 text-center">© 2023 Estudai. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Conteúdo principal -->
+    <main id="home" class="container mx-auto px-4 py-16">
+        <!-- Seção Hero -->
+        <section class="flex flex-col md:flex-row items-center justify-between mb-16">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Transforme sua jornada de estudos no Ensino Médio</h1>
+                <p class="text-lg text-slate-600 mb-6">Conheça o Estudai, sua plataforma completa para organização de estudos, materiais didáticos e acompanhamento acadêmico, especialmente desenvolvida para te ajudar a dominar a nova grade curricular do Ensino Médio.</p>
+                <div class="flex space-x-3">
+                    <a href="cadastro.html" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg transition shadow-lg">
+                        Comece a estudar
+                    </a>
+                    <a href="#about" class="bg-white hover:bg-gray-100 text-indigo-600 border border-indigo-600 px-6 py-3 rounded-lg transition shadow-lg">
+                        Saiba mais
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <img src="images/estud.png" class="rounded-xl shadow-2xl">
+            </div>
+        </section>
+        
+        <!-- Seção Áreas de estudo -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-12">Áreas de Estudo</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-md study-card">
+                    <div class="bg-indigo-50 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-square-root-alt text-indigo-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-slate-800">Matemática do Ensino Médio</h3>
+                    <p class="text-slate-600">Reforce os fundamentos e domine os conteúdos essenciais de Álgebra, Geometria, Trigonometria e Análise para o Ensino Médio.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md study-card">
+                    <div class="bg-indigo-50 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-language text-indigo-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-slate-800">Língua Portuguesa e Estrangeira</h3>
+                    <p class="text-slate-600">Aprimore sua compreensão textual, gramática e redação em Português, e desenvolva fluência em Inglês/Espanhol, conforme a nova grade.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md study-card">
+                    <div class="bg-indigo-50 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-flask text-indigo-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-slate-800">Ciências da Natureza e Humanas</h3>
+                    <p class="text-slate-600">Explore Biologia, Química, Física, História e Geografia com materiais focados nos temas e habilidades exigidos no Ensino Médio.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção Como funciona -->
+        <section class="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl p-8 mb-16">
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-8">Como o Estudai te Ajuda a Vencer a Nova Grade Curricular</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                        <i class="fas fa-user-plus text-indigo-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-slate-800">Cadastro</h3>
+                    <p class="text-slate-600">Crie sua conta gratuita em menos de 2 minutos.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                        <i class="fas fa-book-open text-indigo-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-slate-800">Material</h3>
+                    <p class="text-slate-600">Acesse materiais didáticos e atividades focados na nova grade curricular.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                        <i class="fas fa-chart-line text-indigo-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-slate-800">Progresso</h3>
+                    <p class="text-slate-600">Acompanhe seu desempenho e adapte-se com facilidade aos novos desafios.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção Testemunhos -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-8">O que dizem nossos usuários</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">Ana Clara</h4>
+                            <p class="text-sm text-slate-600">Estudante do 1º ano do Ensino Médio</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 italic">"A transição para o Ensino Médio estava sendo um desafio, mas o Estudai me ajudou a organizar meus estudos e entender a nova grade curricular. As apostilas são ótimas!"</p>
+                    <div class="flex mt-3">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">Pedro Henrique</h4>
+                            <p class="text-sm text-slate-600">Estudante do 2º ano do Ensino Médio</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 italic">"Com o Estudai, consegui um plano de estudos que realmente funciona para mim. As atividades semanais são perfeitas para fixar o conteúdo e me preparar para as provas."</p>
+                    <div class="flex mt-3">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star-half-alt text-yellow-400"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção Sobre -->
+        <section id="about" class="mb-16">
+            <div class="bg-white rounded-xl shadow-md p-8">
+                <h2 class="text-3xl font-bold text-center text-slate-800 mb-6">Sobre o Estudai</h2>
+                <div class="flex flex-col md:flex-row items-center mb-8">
+                    <div class="md:w-1/2 mb-6 md:mb-0">
+                        <img src="images/sob.png" class="rounded-lg">
+                    </div>
+                    <div class="md:w-1/2 md:pl-8">
+                        <h3 class="text-2xl font-semibold mb-4 text-slate-800">Nossa Missão</h3>
+                        <p class="text-slate-600 mb-4">Acreditamos que a transição para a nova grade curricular do Ensino Médio deve ser suave e eficiente para todos. O Estudai nasceu da necessidade de criar uma plataforma que reunisse tudo o que um estudante precisa para se adaptar e prosperar nesse novo cenário educacional.</p>
+                        <p class="text-slate-600 mb-4">Nossa equipe é composta por educadores, designers e desenvolvedores apaixonados por educação e tecnologia.</p>
+                        <p class="text-slate-600">Juntos, estamos construindo ferramentas que ajudam estudantes a alcançarem seus objetivos acadêmicos e profissionais.</p>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl p-6">
+                    <h3 class="text-2xl font-semibold mb-4 text-center text-slate-800">Nossos Valores</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="bg-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                                <i class="fas fa-award text-indigo-600"></i>
+                            </div>
+                            <h4 class="font-semibold mb-2 text-slate-800">Qualidade</h4>
+                            <p class="text-slate-600 text-sm">Materiais didáticos rigorosamente selecionados</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                                <i class="fas fa-bolt text-indigo-600"></i>
+                            </div>
+                            <h4 class="font-semibold mb-2 text-slate-800">Eficiência</h4>
+                            <p class="text-slate-600 text-sm">Métodos que otimizam seu tempo de estudo</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                                <i class="fas fa-heart text-indigo-600"></i>
+                            </div>
+                            <h4 class="font-semibold mb-2 text-slate-800">Paixão</h4>
+                            <p class="text-slate-600 text-sm">Educação como ferramenta de transformação</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção Serviços -->
+        <section id="services" class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-6">Nossos Serviços</h2>
+            
+            <!-- Abas de serviços -->
+            <div class="flex justify-center mb-8">
+                <button class="px-6 py-2 mx-2 tab-btn active" data-tab="activities">Atividades</button>
+                <button class="px-6 py-2 mx-2 tab-btn" data-tab="materials">Materiais</button>
+            </div>
+            
+            <!-- Conteúdo das abas -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <!-- Aba Atividades -->
+                <div id="activities-tab" class="services-tab active">
+                    <h3 class="text-2xl font-semibold mb-4 text-slate-800">Programa de Atividades e Adaptação Curricular</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="border-l-4 border-indigo-500 pl-4">
+                            <h4 class="font-semibold text-lg mb-2 text-slate-800">Planejamento Semanal</h4>
+                            <p class="text-slate-600">Receba um plano de estudo semanal personalizado, alinhado com a nova grade curricular, para otimizar seu tempo e rotina de aprendizado.</p>
+                        </div>
+                        <div class="border-l-4 border-indigo-500 pl-4">
+                            <h4 class="font-semibold text-lg mb-2 text-slate-800">Exercícios Dirigidos</h4>
+                            <p class="text-slate-600">Pratique com atividades e exercícios focados nos conteúdos da nova grade, identificando e superando suas dificuldades.</p>
+                        </div>
+                        <div class="border-l-4 border-indigo-500 pl-4">
+                            <h4 class="font-semibold text-lg mb-2 text-slate-800">Simulados</h4>
+                            <p class="text-slate-600">Teste seus conhecimentos em simulados que replicam o formato das avaliações da nova grade curricular.</p>
+                        </div>
+                        <div class="border-l-4 border-indigo-500 pl-4">
+                            <h4 class="font-semibold text-lg mb-2 text-slate-800">Acompanhamento</h4>
+                            <p class="text-slate-600">Monitore seu progresso e receba suporte para facilitar sua adaptação aos novos conteúdos.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl p-6">
+                        <h4 class="font-semibold text-lg mb-4 text-center text-slate-800">Como participar</h4>
+                        <ol class="list-decimal list-inside space-y-3 text-slate-700">
+                            <li>Crie sua conta gratuita</li>
+                            <li>Complete seu perfil acadêmico</li>
+                            <li>Defina suas metas de estudo</li>
+                            <li>Aprenda técnicas e métodos de estudo eficazes para a nova realidade.</li>
+                            <li>Comece seu plano personalizado</li>
+                        </ol>
+                        <div class="text-center mt-6">
+                            <a href="cadastro.html" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition">Começar agora</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Aba Materiais -->
+                <div id="materials-tab" class="services-tab">
+                    <h3 class="text-2xl font-semibold mb-4 text-slate-800">Materiais de Estudo para a Nova Grade Curricular</h3>
+                    <p class="text-slate-600 mb-6">Acesso completo a materiais exclusivos, como apostilas e videoaulas, organizados por disciplina e alinhados com os conteúdos da nova grade curricular do Ensino Médio.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="study-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
+                        <div class="p-5">
+                            <div class="bg-indigo-50 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-file-pdf text-indigo-600"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2 text-slate-800">Apostilas</h4>
+                            <p class="text-sm text-slate-600 mb-4">Apostilas completas com conteúdos teóricos e exercícios resolvidos, focadas na nova grade curricular.</p>
+                            <a href="apostila.html" class="text-indigo-600 text-sm font-medium">Visualizar Apostilas</a>
+                        </div>
+                    </div>
+                        
+                        <div class="study-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
+                            <div class="p-5">
+                                <div class="bg-indigo-50 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                                    <i class="fas fa-video text-indigo-600"></i>
+                                </div>
+                                <h4 class="font-semibold text-lg mb-2 text-slate-800">Videoaulas</h4>
+                                <p class="text-sm text-slate-600 mb-4">Videoaulas interativas com explicações visuais e exercícios práticos.</p>
+                                <a href="videoaulas.html" class="text-indigo-600 text-sm font-medium">Visualizar Videoaulas</a>
+                            </div>
+                        </div>
+                        
+                        <div class="study-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
+                            <div class="p-5">
+                                <div class="bg-indigo-50 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                                    <i class="fas fa-question-circle text-indigo-600"></i>
+                                </div>
+                                <h4 class="font-semibold text-lg mb-2 text-slate-800">Banco de Questões</h4>
+                                <p class="text-sm text-slate-600 mb-4">Milhares de questões de provas e atividades, com resoluções comentadas, para você dominar os novos conteúdos.</p>
+                                <a href="banco-questoes.html" class="text-indigo-600 text-sm font-medium">Visualizar amostra</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl p-6">
+                        <h4 class="font-semibold text-lg mb-4 text-center text-slate-800">Biblioteca Completa</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                            <div class="bg-white p-3 rounded-lg">
+                                <p class="font-bold text-indigo-600 text-2xl">10+</p>
+                                <p class="text-sm text-slate-600">Disciplinas</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg">
+                                <p class="font-bold text-indigo-600 text-2xl">150+</p>
+                                <p class="text-sm text-slate-600">Apostilas</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg">
+                                <p class="font-bold text-indigo-600 text-2xl">200+</p>
+                                <p class="text-sm text-slate-600">Videoaulas</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg">
+                                <p class="font-bold text-indigo-600 text-2xl">3k+</p>
+                                <p class="text-sm text-slate-600">Questões</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção Contato -->
+        <section id="contact" class="mb-16">
+            <div class="bg-white rounded-xl shadow-md p-8">
+                <h2 class="text-3xl font-bold text-center text-slate-800 mb-6">Entre em Contato</h2>
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2">
+                        <h3 class="text-xl font-semibold mb-4 text-slate-800">Informações</h3>
+                        <p class="text-slate-600 mb-6">Tem dúvidas ou sugestões? Estamos aqui para ajudar você em sua jornada de aprendizado.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="bg-indigo-50 w-10 h-10 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-indigo-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-800">Email</h4>
+                                    <p class="text-slate-600">contato@estudai.com.br</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-indigo-50 w-10 h-10 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-phone-alt text-indigo-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-800">Telefone</h4>
+                                    <p class="text-slate-600">(11) 4002-8922</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-indigo-50 w-10 h-10 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-clock text-indigo-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-800">Horário</h4>
+                                    <p class="text-slate-600">Segunda a sexta: 9h às 18h</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-semibold text-slate-800 mb-3">Siga-nos</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-indigo-50 w-10 h-10 rounded-full flex items-center justify-center text-indigo-600 hover:bg-indigo-100 transition">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="bg-indigo-50 w-10 h-10 rounded-full flex items-center justify-center text-indigo-600 hover:bg-indigo-100 transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="bg-indigo-50 w-10 h-10 rounded-full flex items-center justify-center text-indigo-600 hover:bg-indigo-100 transition">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="bg-indigo-50 w-10 h-10 rounded-full flex items-center justify-center text-indigo-600 hover:bg-indigo-100 transition">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2">
+                        <h3 class="text-xl font-semibold mb-4 text-slate-800">Mensagem</h3>
+                        <form class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Nome</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-slate-700 mb-1">Assunto</label>
+                                <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-slate-700 mb-1">Mensagem</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition">Enviar mensagem</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Rodapé -->
+    <footer class="bg-slate-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between mb-8">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-4">Estudai</h3>
+                    <p class="text-slate-300">Transformando a educação através da tecnologia.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="font-semibold mb-4">Links Rápidos</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#home" class="text-slate-300 hover:text-white transition">Início</a></li>
+                            <li><a href="#about" class="text-slate-300 hover:text-white transition">Sobre</a></li>
+                            <li><a href="#services" class="text-slate-300 hover:text-white transition">Serviços</a></li>
+                            <li><a href="#contact" class="text-slate-300 hover:text-white transition">Contato</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold mb-4">Legal</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-slate-300 hover:text-white transition">Termos de uso</a></li>
+                            <li><a href="#" class="text-slate-300 hover:text-white transition">Política de privacidade</a></li>
+                            <li><a href="#" class="text-slate-300 hover:text-white transition">Cookies</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-700 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm text-slate-300 mb-4 md:mb-0">© 2025 Estudai. Todos os direitos reservados.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-slate-300 hover:text-white transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-slate-300 hover:text-white transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-slate-300 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-slate-300 hover:text-white transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

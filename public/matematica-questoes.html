@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudai - Questões de Matemática</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen">
+<!-- Navbar -->
+<nav class="bg-white shadow-md fixed top-0 left-0 w-full z-40 flex items-center justify-between px-4 py-2">
+    <!-- Menu button and Logo -->
+    <div class="flex items-center space-x-4">
+        <button id="menuBtn" class="bg-indigo-600 text-white p-3 rounded-full shadow-lg toggle-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <a href="index.html" class="text-indigo-600 text-lg font-bold">Estudai</a>
+    </div>
+
+    <!-- Botões de Navegação na Navbar -->
+    <div class="flex items-center space-x-4 ml-auto mr-4">
+    <a href="index.html#services" data-tab="activities" class="text-gray-700 hover:text-indigo-600 transition flex items-center text-sm font-medium" onclick="activateTab('activities')">
+        <i class="fas fa-running mr-2"></i> Atividades
+    </a>
+    <a href="index.html#services" data-tab="materials" class="text-gray-700 hover:text-indigo-600 transition flex items-center text-sm font-medium" onclick="activateTab('materials')">
+        <i class="fas fa-book mr-2"></i> Materiais
+    </a>
+</div>
+    
+    <!-- Profile dropdown -->
+    <div class="relative">
+        <button id="profileBtn" class="flex items-center space-x-2 text-gray-700 hover:text-indigo-600 focus:outline-none">
+            <i class="fas fa-user-circle text-2xl"></i>
+            <span class="hidden sm:inline">Perfil</span>
+            <i class="fas fa-chevron-down text-xs"></i>
+        </button>
+        <div id="profileDropdown" class="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg hidden">
+            <a href="perfil.html" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
+            <a href="seguranca.html" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Segurança</a>
+        </div>
+    </div>
+</nav>
+<div class="pt-16"></div> <!-- Spacer for fixed navbar -->
+
+    <!-- Menu lateral -->
+    <div class="sidebar" id="sidebar">
+        <div class="p-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-xl font-bold text-indigo-600">Estudai</h2>
+                <button id="closeBtn" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-2">
+                <a href="index.html#home" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-home mr-3"></i> Início
+                </a>
+                <a href="index.html#about" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-info-circle mr-3"></i> Sobre
+                </a>
+                <a href="apostila.html" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-file-alt mr-3"></i> Apostilas
+                </a>
+                <a href="videoaulas.html" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-video mr-3"></i> Videoaulas
+                </a>
+                <a href="banco-questoes.html" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-question-circle mr-3"></i> Banco de Questões
+                </a>
+                <a href="index.html#contact" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-envelope mr-3"></i> Contato
+                </a>
+            </div>
+            
+            <div class="mt-8 pt-4 border-t border-gray-200">
+                <p class="text-xs text-gray-500 text-center">© 2023 Estudai. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão de Voltar -->
+    <div class="fixed top-20 left-4 z-30">
+        <button onclick="window.history.back()" class="bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition focus:outline-none focus:ring-2 focus:ring-indigo-500" title="Voltar à página anterior">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+
+    <!-- Conteúdo principal -->
+    <main class="container mx-auto px-4 py-16">
+    <h1 class="text-4xl font-bold text-center text-slate-800 mb-8">Questões de Matemática - 1º Ano do Ensino Médio</h1>
+    <p class="text-center text-slate-600 mb-12">Pratique com questões de múltipla escolha sobre Aritmética, Funções, Geometria, Estatística e Matemática Financeira. Selecione uma alternativa e clique em "Ver Resposta" para ver o resultado.</p>
+
+    <div class="space-y-8">
+        <!-- Aritmética -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-2xl font-semibold mb-4 flex items-center">
+                <i class="fas fa-calculator text-indigo-600 mr-3"></i> Aritmética
+            </h2>
+            <div class="space-y-6">
+                <!-- Questão 1 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">1. Qual dos números abaixo é irracional?</p>
+                    <form class="question-form" data-correct="B">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math1" value="A" class="mr-2"> A) 0,5
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math1" value="B" class="mr-2"> B) √2
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math1" value="C" class="mr-2"> C) 3/4
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math1" value="D" class="mr-2"> D) –1
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+                <!-- Questão 2 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">2. O resultado de 2³ + 3² – 4 é:</p>
+                    <form class="question-form" data-correct="A">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math2" value="A" class="mr-2"> A) 17
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math2" value="B" class="mr-2"> B) 1
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math2" value="C" class="mr-2"> C) –1
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math2" value="D" class="mr-2"> D) 9
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+                <!-- Questão 3 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">3. O valor de |–15 + 5| é:</p>
+                    <form class="question-form" data-correct="B">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math3" value="A" class="mr-2"> A) –10
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math3" value="B" class="mr-2"> B) 10
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math3" value="C" class="mr-2"> C) –20
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math3" value="D" class="mr-2"> D) 20
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+                <!-- Questão 4 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">4. O produto notável (a + b)² é igual a:</p>
+                    <form class="question-form" data-correct="B">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math4" value="A" class="mr-2"> A) a² + b²
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math4" value="B" class="mr-2"> B) a² + 2ab + b²
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math4" value="C" class="mr-2"> C) a² – b²
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math4" value="D" class="mr-2"> D) 2a² + b²
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+                <!-- Questão 5 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">5. Fatorando x² – 9, temos:</p>
+                    <form class="question-form" data-correct="C">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math5" value="A" class="mr-2"> A) (x – 3)²
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math5" value="B" class="mr-2"> B) (x + 3)²
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math5" value="C" class="mr-2"> C) (x – 3)(x + 3)
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math5" value="D" class="mr-2"> D) (x – 9)(x + 1)
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Funções -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-2xl font-semibold mb-4 flex items-center">
+                <i class="fas fa-chart-line text-indigo-600 mr-3"></i> Funções
+            </h2>
+            <div class="space-y-6">
+                <!-- Questão 6 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">6. Se f(x) = 2x + 1, então f(3) é:</p>
+                    <form class="question-form" data-correct="C">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math6" value="A" class="mr-2"> A) 5
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math6" value="B" class="mr-2"> B) 6
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math6" value="C" class="mr-2"> C) 7
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math6" value="D" class="mr-2"> D) 8
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+                <!-- Questão 7 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">7. A função y = 3x é:</p>
+                    <form class="question-form" data-correct="C">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math7" value="A" class="mr-2"> A) Quadrática
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math7" value="B" class="mr-2"> B) Modular
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math7" value="C" class="mr-2"> C) Afim
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math7" value="D" class="mr-2"> D) Exponencial
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+                <!-- Questão 8 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">8. O gráfico de uma função quadrática é uma:</p>
+                    <form class="question-form" data-correct="B">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math8" value="A" class="mr-2"> A) Reta
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math8" value="B" class="mr-2"> B) Parábola
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math8" value="C" class="mr-2"> C) Hipérbole
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math8" value="D" class="mr-2"> D) Circunferência
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+                <!-- Questão 9 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">9. Se y = x² – 4, então y(2) é:</p>
+                    <form class="question-form" data-correct="A">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math9" value="A" class="mr-2"> A) 0
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math9" value="B" class="mr-2"> B) 4
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math9" value="C" class="mr-2"> C) –4
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math9" value="D" class="mr-2"> D) 8
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+                <!-- Questão 10 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">10. Se y = |x – 3|, qual o valor de y quando x = 1?</p>
+                    <form class="question-form" data-correct="B">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math10" value="A" class="mr-2"> A) 1
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math10" value="B" class="mr-2"> B) 2
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math10" value="C" class="mr-2"> C) 3
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math10" value="D" class="mr-2"> D) –2
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Geometria -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-2xl font-semibold mb-4 flex items-center">
+                <i class="fas fa-draw-polygon text-indigo-600 mr-3"></i> Geometria
+            </h2>
+            <div class="space-y-6">
+                <!-- Questão 11 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">11. A soma dos ângulos internos de um triângulo é:</p>
+                    <form class="question-form" data-correct="B">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math11" value="A" class="mr-2"> A) 90°
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math11" value="B" class="mr-2"> B) 180°
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math11" value="C" class="mr-2"> C) 270°
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math11" value="D" class="mr-2"> D) 360°
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+                <!-- Questão 12 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">12. Num triângulo retângulo, a soma dos quadrados dos catetos é igual:</p>
+                    <form class="question-form" data-correct="C">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math12" value="A" class="mr-2"> A) À hipotenusa
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math12" value="B" class="mr-2"> B) À metade da hipotenusa
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math12" value="C" class="mr-2"> C) Ao quadrado da hipotenusa
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math12" value="D" class="mr-2"> D) Ao dobro do cateto maior
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+                
+                <!-- Questão 13 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">13. Um quadrado de lado 5 cm tem área de:</p>
+                    <form class="question-form" data-correct="C">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math13" value="A" class="mr-2"> A) 10 cm²
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math13" value="B" class="mr-2"> B) 20 cm²
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math13" value="C" class="mr-2"> C) 25 cm²
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math13" value="D" class="mr-2"> D) 30 cm²
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estatística -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-2xl font-semibold mb-4 flex items-center">
+                <i class="fas fa-chart-bar text-indigo-600 mr-3"></i> Estatística
+            </h2>
+            <div class="space-y-6">
+                <!-- Questão 14 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">14. O valor de √81 é:</p>
+                    <form class="question-form" data-correct="B">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math14" value="A" class="mr-2"> A) 8
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math14" value="B" class="mr-2"> B) 9
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math14" value="C" class="mr-2"> C) 10
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math14" value="D" class="mr-2"> D) 7
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+                <!-- Questão 15 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">15. Qual é a média dos números 2, 4 e 6?</p>
+                    <form class="question-form" data-correct="B">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math15" value="A" class="mr-2"> A) 3
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math15" value="B" class="mr-2"> B) 4
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math15" value="C" class="mr-2"> C) 5
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math15" value="D" class="mr-2"> D) 6
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+                <!-- Questão 16 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">16. A moda do conjunto {1,2,2,3,4} é:</p>
+                    <form class="question-form" data-correct="B">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math16" value="A" class="mr-2"> A) 1
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math16" value="B" class="mr-2"> B) 2
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math16" value="C" class="mr-2"> C) 3
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math16" value="D" class="mr-2"> D) 4
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+                <!-- Questão 17 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">17. A probabilidade de sair cara em uma moeda é:</p>
+                    <form class="question-form" data-correct="C">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math17" value="A" class="mr-2"> A) 0
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math17" value="B" class="mr-2"> B) 1/4
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math17" value="C" class="mr-2"> C) 1/2
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math17" value="D" class="mr-2"> D) 1
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Matemática Financeira -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-2xl font-semibold mb-4 flex items-center">
+                <i class="fas fa-money-bill-wave text-indigo-600 mr-3"></i> Matemática Financeira
+            </h2>
+            <div class="space-y-6">
+                <!-- Questão 18 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">18. 20% de 50 é:</p>
+                    <form class="question-form" data-correct="C">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math18" value="A" class="mr-2"> A) 5
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math18" value="B" class="mr-2"> B) 8
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math18" value="C" class="mr-2"> C) 10
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math18" value="D" class="mr-2"> D) 15
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+                <!-- Questão 19 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">19. Em um juros simples: J = C.i.t. Se C = 100, i=10% e t=2, então J é:</p>
+                    <form class="question-form" data-correct="C">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math19" value="A" class="mr-2"> A) 10
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math19" value="B" class="mr-2"> B) 15
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math19" value="C" class="mr-2"> C) 20
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math19" value="D" class="mr-2"> D) 25
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+                <!-- Questão 20 -->
+                <div class="border-b pb-4">
+                    <p class="font-medium mb-2">20. Um produto que custa R$100 teve 10% de desconto. Seu novo preço é:</p>
+                    <form class="question-form" data-correct="C">
+                        <div class="space-y-2">
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math20" value="A" class="mr-2"> A) R$80
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math20" value="B" class="mr-2"> B) R$85
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math20" value="C" class="mr-2"> C) R$90
+                            </label>
+                            <label class="flex items-center option-label">
+                                <input type="radio" name="math20" value="D" class="mr-2"> D) R$95
+                            </label>
+                        </div>
+                        <button type="button" class="check-answer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition mt-2">Ver Resposta</button>
+                        <div class="feedback mt-2 text-sm"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+    <script src="script.js"></script>
+</body>
+</html>

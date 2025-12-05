@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudai - Banco de Questões</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen">
+    <!-- Navbar -->
+<nav class="bg-white shadow-md fixed top-0 left-0 w-full z-40 flex items-center justify-between px-4 py-2">
+    <!-- Menu button and Logo -->
+    <div class="flex items-center space-x-4">
+        <button id="menuBtn" class="bg-indigo-600 text-white p-3 rounded-full shadow-lg toggle-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <a href="index.html" class="text-indigo-600 text-lg font-bold">Estudai</a>
+    </div>
+
+    <!-- Botões de Navegação na Navbar -->
+    <div class="flex items-center space-x-4 ml-auto mr-4">
+    <a href="index.html#services" data-tab="activities" class="text-gray-700 hover:text-indigo-600 transition flex items-center text-sm font-medium" onclick="activateTab('activities')">
+        <i class="fas fa-running mr-2"></i> Atividades
+    </a>
+    <a href="index.html#services" data-tab="materials" class="text-gray-700 hover:text-indigo-600 transition flex items-center text-sm font-medium" onclick="activateTab('materials')">
+        <i class="fas fa-book mr-2"></i> Materiais
+    </a>
+</div>
+    
+    <!-- Profile dropdown -->
+    <div class="relative">
+        <button id="profileBtn" class="flex items-center space-x-2 text-gray-700 hover:text-indigo-600 focus:outline-none">
+            <i class="fas fa-user-circle text-2xl"></i>
+            <span class="hidden sm:inline">Perfil</span>
+            <i class="fas fa-chevron-down text-xs"></i>
+        </button>
+        <div id="profileDropdown" class="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg hidden">
+            <a href="perfil.html" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
+            <a href="seguranca.html" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Segurança</a>
+        </div>
+    </div>
+</nav>
+<div class="pt-16"></div> <!-- Spacer for fixed navbar -->
+
+    <!-- Menu lateral -->
+    <div class="sidebar" id="sidebar">
+        <div class="p-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-xl font-bold text-indigo-600">Estudai</h2>
+                <button id="closeBtn" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-2">
+                <a href="index.html#home" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-home mr-3"></i> Início
+                </a>
+                <a href="index.html#about" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-info-circle mr-3"></i> Sobre
+                </a>
+                <a href="apostila.html" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-file-alt mr-3"></i> Apostilas
+                </a>
+                <a href="videoaulas.html" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-video mr-3"></i> Videoaulas
+                </a>
+                <a href="banco-questoes.html" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-question-circle mr-3"></i> Banco de Questões
+                </a>
+                <a href="index.html#contact" class="block px-4 py-2 rounded-lg hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition flex items-center menu-link">
+                    <i class="fas fa-envelope mr-3"></i> Contato
+                </a>
+            </div>
+            
+            <div class="mt-8 pt-4 border-t border-gray-200">
+                <p class="text-xs text-gray-500 text-center">© 2023 Estudai. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão de Voltar -->
+    <div class="fixed top-20 left-4 z-30">
+        <button onclick="window.history.back()" class="bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition focus:outline-none focus:ring-2 focus:ring-indigo-500" title="Voltar à página anterior">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Conteúdo principal -->
+    <main class="container mx-auto px-4 py-16">
+        <h1 class="text-4xl font-bold text-center text-slate-800 mb-8">Banco de Questões</h1>
+        <p class="text-center text-slate-600 mb-12">Pratique com questões de múltipla escolha organizadas por matéria. Clique em uma matéria para acessar as perguntas.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Língua Portuguesa (adicionada) -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-book-open text-indigo-600 text-3xl mr-4"></i>
+                    <h2 class="text-2xl font-semibold">Língua Portuguesa</h2>
+                </div>
+                <p class="text-slate-600 mb-4">Questões sobre Gramática, Literatura e Redação.</p>
+                <a href="portugues-questoes.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Acessar Questões</a>
+            </div>
+
+            <!-- Matemática -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+    <div class="flex items-center mb-4">
+        <i class="fas fa-calculator text-indigo-600 text-3xl mr-4"></i>
+        <h2 class="text-2xl font-semibold">Matemática</h2>
+    </div>
+    <p class="text-slate-600 mb-4">Questões sobre Equações Lineares, Geometria Plana e Funções.</p>
+    <a href="matematica-questoes.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Acessar Questões</a>
+</div>
+
+            <!-- Física -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-atom text-indigo-600 text-3xl mr-4"></i>
+                    <h2 class="text-2xl font-semibold">Física</h2>
+                </div>
+                <p class="text-slate-600 mb-4">Questões sobre Leis de Newton, Termodinâmica e Óptica.</p>
+                <a href="fisica-questoes.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Acessar Questões</a>
+            </div>
+
+            <!-- Química -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-flask text-indigo-600 text-3xl mr-4"></i>
+                    <h2 class="text-2xl font-semibold">Química</h2>
+                </div>
+                <p class="text-slate-600 mb-4">Questões sobre Tabela Periódica, Reações Químicas e Química Orgânica.</p>
+                <a href="quimica-questoes.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Acessar Questões</a>
+            </div>
+
+            <!-- Biologia -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-dna text-indigo-600 text-3xl mr-4"></i>
+                    <h2 class="text-2xl font-semibold">Biologia</h2>
+                </div>
+                <p class="text-slate-600 mb-4">Questões sobre Célula, Evolução e Ecossistemas.</p>
+                <a href="biologia-questoes.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Acessar Questões</a>
+            </div>
+
+            <!-- História -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-history text-indigo-600 text-3xl mr-4"></i>
+                    <h2 class="text-2xl font-semibold">História</h2>
+                </div>
+                <p class="text-slate-600 mb-4">Questões sobre Idade Média, Revolução Francesa e Guerras Mundiais.</p>
+                <a href="historia-questoes.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Acessar Questões</a>
+            </div>
+
+            <!-- Geografia -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-globe text-indigo-600 text-3xl mr-4"></i>
+                    <h2 class="text-2xl font-semibold">Geografia</h2>
+                </div>
+                <p class="text-slate-600 mb-4">Questões sobre Climas, População e Recursos Naturais.</p>
+                <a href="geografia-questoes.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Acessar Questões</a>
+            </div>
+
+            <!-- Filosofia -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-brain text-indigo-600 text-3xl mr-4"></i>
+                    <h2 class="text-2xl font-semibold">Filosofia</h2>
+                </div>
+                <p class="text-slate-600 mb-4">Questões sobre Ética, Metafísica e Epistemologia.</p>
+                <a href="filosofia-questoes.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Acessar Questões</a>
+            </div>
+
+            <!-- Sociologia -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-users text-indigo-600 text-3xl mr-4"></i>
+                    <h2 class="text-2xl font-semibold">Sociologia</h2>
+                </div>
+                <p class="text-slate-600 mb-4">Questões sobre Estruturação Social, Cultura e Desigualdade.</p>
+                <a href="sociologia-questoes.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Acessar Questões</a>
+            </div>
+
+            <!-- Arte -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-palette text-indigo-600 text-3xl mr-4"></i>
+                    <h2 class="text-2xl font-semibold">Arte</h2>
+                </div>
+                <p class="text-slate-600 mb-4">Questões sobre Renascimento, Arte Moderna e Instalação.</p>
+                <a href="arte-questoes.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Acessar Questões</a>
+            </div>
+
+            <!-- Inglês (completado) -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-language text-indigo-600 text-3xl mr-4"></i>
+                    <h2 class="text-2xl font-semibold">Inglês</h2>
+                </div>
+                <p class="text-slate-600 mb-4">Questões sobre Vocabulário, Gramática e Conversação.</p>
+                <a href="ingles-questoes.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Acessar Questões</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between mb-8">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-4">Estudai</h3>
+                    <p class="text-slate-300">Transformando a educação através da tecnologia.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="font-semibold mb-4">Legal</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-slate-300 hover:text-white transition">Termos de uso</a></li>
+                            <li><a href="#" class="text-slate-300 hover:text-white transition">Política de privacidade</a></li>
+                            <li><a href="#" class="text-slate-300 hover:text-white transition">Cookies</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-700 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm text-slate-300 mb-4 md:mb-0">© 2025 Estudai. Todos os direitos reservados.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-slate-300 hover:text-white transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-slate-300 hover:text-white transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-slate-300 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-slate-300 hover:text-white transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
