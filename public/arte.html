@@ -180,13 +180,60 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
-    <script>
+<script>
+    // Verificar se está logado (permissões)
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    if (!usuario) {
+        window.location.href = 'login.html';
+    } else {
+        document.getElementById('fullName').value = usuario.nome || '';
+        document.getElementById('email').value = usuario.email || '';
+    }
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+        localStorage.removeItem('usuario');
+        window.location.href = 'index.html';
+    });
+
+   // Salvar alterações (código atualizado)
+document.getElementById('formPerfil').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nome = document.getElementById('fullName').value.trim();
+    const dob = document.getElementById('dob').value;
+    const gender = document.getElementById('gender').value;
+    
+    if (!nome) {
+        alert('Nome é obrigatório.');
+        return;
+    }
+    
+    try {
+        const response = await fetch('/atualizar-perfil', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nome, dob, gender, email: usuario.email })
+        });
+        if (!response.ok) throw new Error('Erro no servidor');
+        const result = await response.json();
+        alert(result.message);
+        
+        // Atualizar localStorage com o novo nome
+        usuario.nome = nome;
+        localStorage.setItem('usuario', JSON.stringify(usuario));
+    } catch (err) {
+        alert('Erro: ' + err.message);
+    }
+});
+
         function toggleAnswer(id) {
             const el = document.getElementById(id);
             el.classList.toggle('hidden');
         }
     </script>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    
 </body>
 </html>
